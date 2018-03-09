@@ -1,0 +1,75 @@
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+public class Main
+{
+	static int maze[][];
+	static Queue<Node> queue;
+	public static void main(String args[])
+	{
+		Scanner sc = new Scanner(System.in);
+		
+		int maze_x = sc.nextInt();
+		int maze_y = sc.nextInt();
+		
+		maze = new int[maze_x][maze_y];
+		queue = new LinkedList<Node>();
+		
+		for(int i = 0 ; i < maze_x ; i++)
+		{
+			String input = sc.next();
+			for(int j = 0 ; j < maze_y ; j++)
+			{
+				maze[i][j] = input.charAt(j);
+			}
+		}
+		
+		for(int i = 0 ; i < maze_x ; i++)
+		{
+			for(int j = 0 ; j < maze_y ; j++)
+				System.out.print(maze[i][j]);
+			System.out.println();
+		}
+	}
+}
+
+
+
+class Node
+{
+	int x;
+	int y;
+	int cnt;
+	
+	public Node(int x, int y, int cnt)
+	{
+		this.x = x;
+		this.y = y;
+		this.cnt = cnt;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public int getCnt() {
+		return cnt;
+	}
+
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+}
