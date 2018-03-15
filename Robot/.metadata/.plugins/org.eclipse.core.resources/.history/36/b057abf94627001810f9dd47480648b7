@@ -1,0 +1,193 @@
+import java.util.Scanner;
+
+public class Main 
+{
+	public static void main(String args[])
+	{
+		Scanner sc = new Scanner(System.in);
+		
+		int width = sc.nextInt();
+		int height = sc.nextInt();
+		int map[][] = new int[height][width];
+		int N = sc.nextInt();
+		int M = sc.nextInt();
+		int flag = 0; // 0이면 성공 1이면 벽 충돌 2이면 로봇끼리 충돌
+		int robot_1 = 0;
+		int robot_2 = 0;
+		
+		Robot array[] = new Robot[N];
+		for(int i = 0 ; i < N ; i++)
+		{
+			int x = sc.nextInt();
+			int y = sc.nextInt();
+			String s = sc.next();
+			array[i] = new Robot(x-1,height-y,s);
+			map[height-y][x-1] = 1;
+		}
+		
+		for(int i = 0 ; i < M ; i++)
+		{
+			int number = sc.nextInt() - 1;
+			String status = sc.next();
+			int loop = sc.nextInt();
+			int flag2 = 0; // 0이면 ㄱ 1이면 탈출
+			
+			for(int j = 0 ; j < loop ; j++)
+			{
+				if(status.equals("F"))
+				{
+					if(array[number].getStatus().equals("N"))
+					{
+						if(array[number].getY() - 1 < 0)
+						{
+							flag = 1;
+							robot_1 = number + 1;
+							flag2 = 1;
+							break;
+						}
+						else if(map[array[number].getY() - 1][array[number].getX()] == 1)
+						{
+							flag = 2;
+							flag2 = 1;
+							break;
+						}
+						else
+						{
+							map[array[number].getY()][array[number].getX()] = 0;
+							map[array[number].getY() - 1][array[number].getX()] = 1;
+							array[number].setY(array[number].getY()-1);
+							flag = 0;
+						}
+					}
+					else if(array[number].getStatus().equals("E"))
+					{
+						if(array[number].getX() + 1 >= width)
+						{
+							flag = 1;
+							flag2 = 1;
+							robot_1 = number + 1;
+							break;
+						}
+						else if(map[array[number].getY()][array[number].getX() + 1] == 1)
+						{
+							flag = 2;
+							flag2 = 1;
+							break;
+						}
+						else
+						{
+							map[array[number].getY()][array[number].getX()] = 0;
+							map[array[number].getY()][array[number].getX() + 1] = 1;
+							array[number].setX(array[number].getX()+1);
+							flag = 0;
+						}
+					}
+					else if(array[number].getStatus().equals("W"))
+					{
+						if(array[number].getX() -1 <0)
+						{
+							flag = 1;
+							robot_1 = number + 1;
+							flag2 = 1;
+							break;
+						}
+						else if(map[array[number].getY()][array[number].getX() - 1] == 1)
+						{
+							flag = 2;
+							flag2 = 1;
+							break;
+						}
+						else
+						{
+							map[array[number].getY()][array[number].getX()] = 0;
+							map[array[number].getY()][array[number].getX() - 1] = 1;
+							array[number].setX(array[number].getX()-1);
+							flag = 0;
+						}
+					}
+					else if(array[number].getStatus().equals("S"))
+					{
+						if(array[number].getY() + 1 >= height )
+						{
+							flag = 1;
+							robot_1 = number + 1;
+							flag2 = 1;
+							break;
+						}
+						else if(map[array[number].getY() + 1][array[number].getX()] == 1)
+						{
+							flag = 2;
+							flag2 = 1;
+							break;
+						}
+						else
+						{
+							map[array[number].getY()][array[number].getX()] = 0;
+							map[array[number].getY() + 1][array[number].getX()] = 1;
+							array[number].setY(array[number].getY()+1);
+							flag = 0;
+						}
+					}
+				}
+				
+				else if(status.equals("L"))
+				{
+					
+				}
+				
+				else if(status.equals("R"))
+				{
+					
+				}
+			}
+			
+			if(flag2 == 1)
+				break;
+		}
+		if(flag == 0)
+			System.out.println("OK");
+		else if(flag == 1)
+			System.out.println("Robot " + robot_1 + " crashes into the wall");
+		else if(flag == 2)
+			System.out.println("Robot " + " crashes into robot ");
+	}
+
+	
+	
+}
+
+
+
+
+class Robot
+{
+	int x;
+	int y;
+	String status;
+	
+	public Robot(int x, int y, String status)
+	{
+		this.x = x;
+		this.y = y;
+		this.status = status;
+	}
+	
+	public int getX() {
+		return x;
+	}
+	public void setX(int x) {
+		this.x = x;
+	}
+	public int getY() {
+		return y;
+	}
+	public void setY(int y) {
+		this.y = y;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+}
