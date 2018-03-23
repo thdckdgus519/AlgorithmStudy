@@ -1,0 +1,6 @@
+﻿  View.cpp
+d:\송창현\sw역량테스트 공부\sw academy\view\view\view\view.cpp(14): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1272): note: 'scanf' 선언을 참조하십시오.
+d:\송창현\sw역량테스트 공부\sw academy\view\view\view\view.cpp(22): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1272): note: 'scanf' 선언을 참조하십시오.
+  View.vcxproj -> D:\송창현\SW역량테스트 공부\SW Academy\View\View\Debug\View.exe
